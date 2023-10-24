@@ -1,0 +1,16 @@
+type Food {
+  id: ID!
+  name: String!
+  price: Float!
+  description: String
+  category: String!
+}
+
+type Query {
+  foods: [Food]
+}
+
+type Mutation {
+  addFood(name: String!, price: Float!, description: String, category: String!): Food
+  deleteFood(id: ID!): Food
+}
