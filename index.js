@@ -1,10 +1,14 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const {graphqlHTTP} = require('express-graphql');
 const mongoose = require('mongoose');
 const {buildSchema} = require('graphql');
 
 const app = express();
+
+// Enable All CORS Requests
+app.use(cors());
 
 mongoose.connect(process.env.MONGODB_SRV, {
 	useNewUrlParser: true,
@@ -45,7 +49,7 @@ const root = {
 };
 
 app.use(
-	'/graphql',
+	'/',
 	graphqlHTTP({
 		schema: schema,
 		rootValue: root,
@@ -55,5 +59,5 @@ app.use(
 
 const PORT = 4000;
 app.listen(PORT, () => {
-	console.log(`GraphQL Server is running on http://localhost:${PORT}/graphql`);
+	console.log(`GraphQL Server is running on http://localhost:${PORT}/`);
 });
